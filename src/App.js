@@ -1,23 +1,40 @@
-import logo from './logo.svg';
+
 import './App.css';
+import { useState } from 'react';
+import Navbar from './components/Navbar';
+import Main from './components/Main';
 
 function App() {
+  
+  const [style,setStyle]=useState({color:'black',background:'#f2f2f2'})
+
+  const [curMode,setcurMode] = useState('Dark')
+
+  const modeswitch=()=>{
+      if(style.color==='black')
+      {
+          setStyle({color:'white',background:'#191a29'})
+          setcurMode("Dark")
+      }
+      else{
+          setStyle({color:'black',background:'#f2f2f2'})
+          setcurMode("Light")
+      }
+  }
+  
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App" style={style} >
+      <Navbar> </Navbar>
+      <div>
+            <div>
+                <div className=" form-switch">
+                <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" onChange={modeswitch}/>
+                Turn on {curMode} Mode
+              </div>
+            </div>
+      </div>
+      <Main style={style} changeStyle={style}> </Main>
     </div>
   );
 }
